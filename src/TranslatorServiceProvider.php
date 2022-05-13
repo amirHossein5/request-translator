@@ -2,9 +2,9 @@
 
 namespace AmirHossein5\RequestTranslator;
 
-use Illuminate\Support\ServiceProvider;
 use AmirHossein5\RequestTranslator\Console\CreateTranslationFileCommand;
 use AmirHossein5\RequestTranslator\Console\InstallCommand;
+use Illuminate\Support\ServiceProvider;
 
 class TranslatorServiceProvider extends ServiceProvider
 {

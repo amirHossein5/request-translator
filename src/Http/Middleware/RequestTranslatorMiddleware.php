@@ -2,25 +2,25 @@
 
 namespace AmirHossein5\RequestTranslator\Http\Middleware;
 
-use Closure;
 use AmirHossein5\RequestTranslator\Facades\Translator;
 use AmirHossein5\RequestTranslator\Translator as TranslatorClass;
-use Illuminate\Support\Arr;
+use Closure;
 
-class RequestTranslatorMiddleware 
+class RequestTranslatorMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param array<string> $fields
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     * @param array<string>            $fields
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle($request, Closure $next, string ...$fields)
     {
         $translatedArray = $request->toArray();
-        $translatorClass = new TranslatorClass;
+        $translatorClass = new TranslatorClass();
 
         foreach ($fields as $field) {
             if (Translator::hasTemplate($field)) {
@@ -36,18 +36,25 @@ class RequestTranslatorMiddleware
                         $filePath = null;
                         $field = $value;
                     }
+
                     try {
-                        $translatorClass->data_set_closure($translatedArray, $field, fn ($data) =>
-                            Translator::translate($data, $filePath)
+                        $translatorClass->data_set_closure(
+                            $translatedArray,
+                            $field,
+                            fn ($data) => Translator::translate($data, $filePath)
                         );
-                    } catch (\Throwable $e) {}                    
+                    } catch (\Throwable $e) {
+                    }
                 }
             } else {
                 try {
-                    $translatorClass->data_set_closure($translatedArray, $field, fn ($data) =>
-                        Translator::translate($data)
+                    $translatorClass->data_set_closure(
+                        $translatedArray,
+                        $field,
+                        fn ($data) => Translator::translate($data)
                     );
-                } catch (\Throwable $e) {}
+                } catch (\Throwable $e) {
+                }
             }
         }
 

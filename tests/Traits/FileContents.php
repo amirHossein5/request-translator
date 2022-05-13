@@ -5,13 +5,13 @@ namespace AmirHossein5\RequestTranslator\Tests\Traits;
 trait FileContents
 {
     /**
-     * Content of digits_translation
+     * Content of digits_translation.
      *
      * @return string
      */
     private function digits_translation_content(): string
     {
-        return <<< EOL
+        return <<< 'EOL'
             '۱' => '1',
             '۲' => '2',
             '۴' => '4',
@@ -27,38 +27,38 @@ trait FileContents
     }
 
     /**
-     * Content of word_translation
+     * Content of word_translation.
      *
      * @return string
      */
     private function word_translation_content(): string
     {
-        return <<< EOL
+        return <<< 'EOL'
             'تست' => 'test',
             'سلام' => 'hi',
         EOL;
     }
 
-   /**
-     * Content of sentence_translation
-     * 
+    /**
+     * Content of sentence_translation.
+     *
      * @return string
      */
     private function sentence_translation_content(): string
     {
-        return <<< EOL
+        return <<< 'EOL'
             'این یک پیام تستی است' => 'this is a test message'
         EOL;
     }
 
-   /**
-     * Content of en_request_translation
-     * 
+    /**
+     * Content of en_request_translation.
+     *
      * @return string
      */
     private function en_request_translation_content(): string
     {
-        return <<< EOL
+        return <<< 'EOL'
             'تست' => 'test',
         EOL;
     }
