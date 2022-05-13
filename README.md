@@ -57,7 +57,7 @@ Pass the path of file which is located in lang folder:
 
 ## Templates
 
-Templates can be for defineing a group of fields:
+Templates can be for define a group of fields, and you may define them in ```RouteServiceProvider```:
 
 ```php
 use AmirHossein5\RequestTranslator\Facades\Translator;
