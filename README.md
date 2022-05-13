@@ -51,7 +51,7 @@ Also it accepts "dot" notation:
 Pass the path of file which is located in lang folder: 
 
 ```php
-->middleware('translate_from:fa/digits_translation.php', 'translate: ....);
+->middleware('translate_from:fa/digits_translation.php', 'translate: ....');
 ``` 
 
 
