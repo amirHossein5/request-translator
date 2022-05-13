@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool hasTemplate(string $name)
  * @method static string translate(string $data, string $translationFile = null)
  * @method static mixed data_set_closure(mixed &$target, string|array $key, mixed $value, bool $overwrite = true)
- * 
+ *
  * @see \AmirHossein5\RequestTranslator\Translator
  */
 class Translator extends Facade

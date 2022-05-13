@@ -2,7 +2,7 @@
 
 namespace AmirHossein5\RequestTranslator\Tests\Traits;
 
-trait WordTranslatedArrays 
+trait WordTranslatedArrays
 {
     //
 }

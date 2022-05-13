@@ -2,8 +2,6 @@
 
 namespace AmirHossein5\RequestTranslator\Tests;
 
-use AmirHossein5\RequestTranslator\Http\Middleware\RequestTranslatorMiddleware;
-use AmirHossein5\RequestTranslator\Http\Middleware\TranslateFromMiddleware;
 use AmirHossein5\RequestTranslator\Tests\Traits\CreatesTranslationFile;
 use AmirHossein5\RequestTranslator\Tests\Traits\DigitsTranslatedArrays;
 use AmirHossein5\RequestTranslator\Tests\Traits\EnTranslatedArrays;
@@ -12,33 +10,37 @@ use AmirHossein5\RequestTranslator\Tests\Traits\TemplateTranslatedArrays;
 use AmirHossein5\RequestTranslator\TranslatorServiceProvider;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
 
-class TestCase extends TestbenchTestCase 
+class TestCase extends TestbenchTestCase
 {
-    use CreatesTranslationFile, FileContents, EnTranslatedArrays, DigitsTranslatedArrays, TemplateTranslatedArrays;
+    use CreatesTranslationFile;
+    use FileContents;
+    use EnTranslatedArrays;
+    use DigitsTranslatedArrays;
+    use TemplateTranslatedArrays;
 
     const TARGET = [
-        'cash' => '۱۲٫۵۰۰',
+        'cash'   => '۱۲٫۵۰۰',
         'mobile' => '۰۹۱۲۳۴۵۶۷۸۹',
-        'words' => [
-            'تست', 'سلام'
+        'words'  => [
+            'تست', 'سلام',
         ],
         'sentence' => 'این یک پیام تستی است',
-        'all' => [
-            'cash' => '۱۲٫۵۰۰',
+        'all'      => [
+            'cash'   => '۱۲٫۵۰۰',
             'mobile' => '۰۹۱۲۳۴۵۶۷۸۹',
-            'words' => [
-                'تست', 'سلام'
+            'words'  => [
+                'تست', 'سلام',
             ],
-            'sentence' => 'این یک پیام تستی است',
+            'sentence'  => 'این یک پیام تستی است',
             'inner-all' => [
-                'cash' => '۱۲٫۵۰۰',
+                'cash'   => '۱۲٫۵۰۰',
                 'mobile' => '۰۹۱۲۳۴۵۶۷۸۹',
-                'words' => [
-                    'تست', 'سلام'
+                'words'  => [
+                    'تست', 'سلام',
                 ],
                 'sentence' => 'این یک پیام تستی است',
-            ]
-        ]
+            ],
+        ],
     ];
 
     /**
@@ -47,7 +49,7 @@ class TestCase extends TestbenchTestCase
      * @return void
      */
     public function setUp(): void
-    {        
+    {
         parent::setUp();
 
         $this->createTranslationFiles([

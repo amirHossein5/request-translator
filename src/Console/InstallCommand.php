@@ -4,8 +4,8 @@ namespace AmirHossein5\RequestTranslator\Console;
 
 use AmirHossein5\RequestTranslator\Http\Middleware\RequestTranslatorMiddleware;
 use AmirHossein5\RequestTranslator\Http\Middleware\TranslateFromMiddleware;
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
@@ -30,7 +30,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $replace = '"translate" => ' . '\\' . RequestTranslatorMiddleware::class . '::class';
+        $replace = '"translate" => '.'\\'.RequestTranslatorMiddleware::class.'::class';
         $after = [
             '\Illuminate\Routing\Middleware\ThrottleRequests::class',
             '\App\Http\Middleware\Authenticate::class',
@@ -43,29 +43,29 @@ class InstallCommand extends Command
         }
 
         $after = $replace;
-        $replace = '"translate_from" => ' . '\\'.TranslateFromMiddleware::class . '::class';
+        $replace = '"translate_from" => '.'\\'.TranslateFromMiddleware::class.'::class';
 
         if (!$this->replaceAfterMiddleware([$after], $replace)) {
             return;
-        }  
+        }
 
         $this->info('Installation completed successfully');
     }
 
     /**
      * Adds something after something in middleware.
-     * 
-     * @param array $after
+     *
+     * @param array  $after
      * @param string $replace
      * @param string $middleware
-     * 
+     *
      * @return int|bool
      */
     public function replaceAfterMiddleware(array $after, string $replace, string $middleware = 'routeMiddleware'): int|bool
     {
         $httpKernel = file_get_contents(app_path('/Http/Kernel.php'));
 
-        $routeMiddleware = Str::before(Str::after($httpKernel, '$' . $middleware . ' = ['), '];');
+        $routeMiddleware = Str::before(Str::after($httpKernel, '$'.$middleware.' = ['), '];');
 
         if (Str::contains($routeMiddleware, $replace)) {
             return true;
@@ -82,7 +82,7 @@ class InstallCommand extends Command
 
         if (!$after) {
             $this->error(
-                "to register middleware one of these middlewares should exists in route middleware:"
+                'to register middleware one of these middlewares should exists in route middleware:'
             );
 
             foreach ($expectedExistsMiddlewares as $middleware) {
@@ -93,8 +93,8 @@ class InstallCommand extends Command
         }
 
         $modifiedMiddleware = str_replace(
-            $after . ',',
-            $after . ',' . PHP_EOL . '        ' . $replace . ',',
+            $after.',',
+            $after.','.PHP_EOL.'        '.$replace.',',
             $routeMiddleware
         );
 

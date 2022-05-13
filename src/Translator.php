@@ -3,7 +3,6 @@
 namespace AmirHossein5\RequestTranslator;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Lang;
 
 class Translator
 {
@@ -16,7 +15,7 @@ class Translator
 
     /**
      * Path of translation File.
-     * 
+     *
      * @var string
      */
     public $file = '';
@@ -30,14 +29,14 @@ class Translator
     {
         $locale = config('app.locale') ?? 'en';
 
-        $this->file = lang_path($locale . '_request_translation.php');
+        $this->file = lang_path($locale.'_request_translation.php');
     }
 
     /**
      * Modifies translation file path.
-     * 
+     *
      * @param string $path
-     * 
+     *
      * @return void
      */
     public function fromFile(string $path): void
@@ -47,7 +46,7 @@ class Translator
 
     /**
      * Returns translation file.
-     * 
+     *
      * @return string
      */
     public function file(): string
@@ -57,9 +56,10 @@ class Translator
 
     /**
      * Adds field template.
-     * 
+     *
      * @param string $name
      * @param string $fields
+     *
      * @return void
      */
     public function for(string $name, array $fields): void
@@ -69,7 +69,7 @@ class Translator
 
     /**
      * Returns all of the templates.
-     * 
+     *
      * @return array
      */
     public function templates(): array
@@ -79,9 +79,9 @@ class Translator
 
     /**
      * Returns intended the template.
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return array
      */
     public function template(string $name): array
@@ -91,9 +91,9 @@ class Translator
 
     /**
      * Determines the intended template exists.
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return bool
      */
     public function hasTemplate(string $name): bool
@@ -103,30 +103,31 @@ class Translator
 
     /**
      * Translates the given text.
-     * 
+     *
      * @param string $data
      * @param string $translationFile
-     * 
+     *
      * @return string
      */
     public function translate(string $data, string $translationFile = null): string
     {
-        $translationFile = $translationFile 
+        $translationFile = $translationFile
             ? lang_path($translationFile)
             : $this->file();
 
-        $translationFile = include($translationFile);
+        $translationFile = include $translationFile;
 
         return strtr($data, $translationFile);
     }
 
-   /**
+    /**
      * Set an item on an array or object using dot notation and is compatible with closure.
      *
-     * @param  mixed  $target
-     * @param  string|array  $key
-     * @param  mixed  $value
-     * @param  bool  $overwrite
+     * @param mixed        $target
+     * @param string|array $key
+     * @param mixed        $value
+     * @param bool         $overwrite
+     *
      * @return mixed
      */
     public function data_set_closure(mixed &$target, string|array $key, mixed $value, bool $overwrite = true): mixed

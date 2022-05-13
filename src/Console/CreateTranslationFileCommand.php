@@ -32,12 +32,13 @@ class CreateTranslationFileCommand extends Command
             : $path;
         $locale = config('app.locale') ?? 'en';
         $format = '.php';
-        $fileName = $locale . '_request_translation';
+        $fileName = $locale.'_request_translation';
 
-        $path = lang_path($path ? $path . $format : $fileName . $format);
+        $path = lang_path($path ? $path.$format : $fileName.$format);
 
         if (file_exists($path)) {
             $this->error('already exists!');
+
             return;
         }
 
@@ -50,20 +51,20 @@ class CreateTranslationFileCommand extends Command
 
     /**
      * Returns stub file path.
-     * 
+     *
      * @return string
      */
     private function getStub(): string
     {
-        return __DIR__ . '/../../stubs/translation-file.stub';
+        return __DIR__.'/../../stubs/translation-file.stub';
     }
 
     /**
      * Creates file in given path by stub contents.
-     * 
+     *
      * @param string $path
      * @param string $stubPath
-     * 
+     *
      * @return int|bool
      */
     private function createFileFromStub(string $path, string $stubPath): int|bool
