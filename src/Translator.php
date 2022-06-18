@@ -58,7 +58,7 @@ class Translator
      * Adds field template.
      *
      * @param string $name
-     * @param array $fields
+     * @param array  $fields
      * @param string $path
      *
      * @return void
@@ -75,7 +75,7 @@ class Translator
                 }
                 $pathableFields[$key] = $value;
             }
-            
+
             $this->templates[$name] = $pathableFields;
         } else {
             $this->templates[$name] = $fields;
