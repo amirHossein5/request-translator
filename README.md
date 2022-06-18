@@ -82,6 +82,21 @@ Translator::for('userDigits', [
 ]);
 ```
 
+And path may define for all of the fields:
+
+```php
+use AmirHossein5\RequestTranslator\Facades\Translator;
+
+Translator::for('userDigits', [
+    'cash' => 'fa/cash_translation.php', 
+    'phone',
+    'number'
+], 'test.php');
+```
+
+```cash``` will be translate from ```fa/cash_translation.php```, and others from ```test.php```.
+
+
 The priority of using translation files: 
 
  - In template

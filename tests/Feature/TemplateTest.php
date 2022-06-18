@@ -94,4 +94,33 @@ class TemplateTest extends TestCase
             $this->assertEquals($request->all(), $this->template_middleware());
         }, 'all.words.*', 'mobile', 'template-middleware');
     }
+
+    public function test_path_can_be_define_globally_in_template()
+    {
+        // 1-in template 3-default path
+        Translator::for('template-default-path', [
+            'mobile'   => 'digits_translation.php',
+            'sentence',
+            'words.*' => 'en_request_translation.php',
+        ], 'sentence_translation.php');
+
+        (new RequestTranslatorMiddleware())->handle(request()->merge(TestCase::TARGET), function ($request) {
+            $this->assertEquals($request->all(), $this->template_default_path());
+        }, 'all.words.*', 'mobile', 'template-default-path');
+
+        // 1-in template 2-in middleware
+        Translator::for('template-middleware', [
+            'mobile'   => 'digits_translation.php',
+            'sentence', 
+        ], 'sentence_translation.php');
+
+        (new TranslateFromMiddleware())->handle(request(), function ($request) {
+        }, 'word_translation.php');
+
+        $this->assertEquals(lang_path('word_translation.php'), Translator::file());
+
+        (new RequestTranslatorMiddleware())->handle(request()->merge(TestCase::TARGET), function ($request) {
+            $this->assertEquals($request->all(), $this->template_middleware());
+        }, 'all.words.*','words.*' , 'mobile', 'template-middleware');
+    }
 }

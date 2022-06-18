@@ -58,13 +58,28 @@ class Translator
      * Adds field template.
      *
      * @param string $name
-     * @param string $fields
+     * @param array $fields
+     * @param string $path
      *
      * @return void
      */
-    public function for(string $name, array $fields): void
+    public function for(string $name, array $fields, string $path = null): void
     {
-        $this->templates[$name] = $fields;
+        if ($path) {
+            $pathableFields = [];
+
+            foreach ($fields as $key => $value) {
+                if (is_int($key)) {
+                    $key = $value;
+                    $value = $path;
+                }
+                $pathableFields[$key] = $value;
+            }
+            
+            $this->templates[$name] = $pathableFields;
+        } else {
+            $this->templates[$name] = $fields;
+        }
     }
 
     /**
