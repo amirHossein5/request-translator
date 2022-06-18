@@ -111,7 +111,7 @@ class TemplateTest extends TestCase
         // 1-in template 2-in middleware
         Translator::for('template-middleware', [
             'mobile'   => 'digits_translation.php',
-            'sentence', 
+            'sentence',
         ], 'sentence_translation.php');
 
         (new TranslateFromMiddleware())->handle(request(), function ($request) {
@@ -121,6 +121,6 @@ class TemplateTest extends TestCase
 
         (new RequestTranslatorMiddleware())->handle(request()->merge(TestCase::TARGET), function ($request) {
             $this->assertEquals($request->all(), $this->template_middleware());
-        }, 'all.words.*','words.*' , 'mobile', 'template-middleware');
+        }, 'all.words.*', 'words.*', 'mobile', 'template-middleware');
     }
 }
