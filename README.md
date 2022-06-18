@@ -86,7 +86,7 @@ The priority of using translation files:
 
  - In template
  - In translate_from middleware
- - Default path(```LOCALE_request_translation```)
+ - Default path(```LOCALE_request_translation.php```)
 
 
 
